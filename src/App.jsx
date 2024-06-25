@@ -1,16 +1,29 @@
 import React, { useContext, useState } from 'react';
 import HomeScreen from './Screens/Home/HomeScreen';
 import { ThemeContext } from './context/ThemeContext';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import AddNewScreen from './Screens/NewIdea/AddNewScreen';
+
+const router=createBrowserRouter([
+  {
+    path:'/',
+    element:<HomeScreen/>
+  },
+  {
+    path:'/new',
+    element:<AddNewScreen/>
+  },
+])
 
 function App() {
   // Use useState to manage theme state
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
   
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <div className='flex flex-col items-center p-4 md:p-10' data-theme={theme}>
         <div className='max-w-2xl w-full items-center'>
-          <HomeScreen />
+          <RouterProvider router={router}/>
         </div>
       </div>
     </ThemeContext.Provider>
